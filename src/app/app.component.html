@@ -1,0 +1,84 @@
+
+<p>Employee</p>
+<p-button label="שיחזור רשימה" (click)="refresh()"></p-button>
+
+<br>
+<span class="p-float-label">
+    <input id="float-input" type="text" pInputText [(ngModel)]="searchByName" (input)="SearchByName()"  #userName="ngModel"  pattern="[א-ת ]*" maxlength="100" > 
+    <div class="form-group">
+        <div  *ngIf="userName.invalid && (userName.dirty || userName.touched)">
+          <div *ngIf="userName.errors.pattern"> שדה זה יכול להכיל אותיות בעברית בלבד! </div>
+        </div>
+      </div>
+    <label for="float-input">חיפוש חופשי לפי שם</label>
+</span>
+<br>
+<span class="p-float-label">
+    <input type="text" pInputText id="s" [(ngModel)]="ById" >
+    <label for="s">חיפוש לפי תעודת זהות  </label>
+</span>
+<p-button label="אישור ת.ז" (click)="SearchById()"></p-button>
+<br>
+<label>{{help}}</label>
+<br>
+
+<p-listbox [options]="employeesList" [(ngModel)]="selectedCity1" optionLabel="city"(onChange)="selectCity()" ></p-listbox><br><br><br>
+<p-listbox *ngIf="CitySelected" [options]="aaa" [(ngModel)]="selectedStreet1" optionLabel="street"(onChange)="selectStreet()" ></p-listbox>
+
+
+<!-- <p-listbox [options]="citylists" [(ngModel)]="selectedCity1" [style]="{'width':'15rem'}"></p-listbox> -->
+
+
+<!-- <p-listbox  [options]="cities" [(ngModel)]="selectedCity1" ></p-listbox> -->
+<!-- <p-listbox [options]="employeesList" [(ngModel)]="selectedCity2" optionLabel="name"></p-listbox> -->
+
+<br>
+<p>:בחר טווח תאריכים</p>
+<input type="date" name="" id="date1" [(ngModel)]="ByData1" >
+<input type="date" name="" id="date2" [(ngModel)]="ByData2">
+<br>
+<p-button label="אישור תאריך" (click)="SearchByDate()"></p-button>
+<br>
+<br>
+
+
+
+<input  (change)="upload($event,r)"
+                    name="LoadDocument" #LoadDocument type="file" accept="image/*">
+                    <br>
+
+                  <div></div>  <p-button label="<" (click)="Prev()"></p-button><p>1</p> <p-button label=">" (click)="Next()"></p-button>           
+<p-table [value]="employeesList" >
+  <ng-template pTemplate="header">
+      <tr>
+          <th>FirstName</th>
+          <th>LastName</th>
+          <th>Id</th>
+          <th>Age</th>
+          <th>Startdate</th>
+       
+          <th>City</th>
+       
+          <th>Streets</th>
+         
+
+      </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-employee>
+      <tr>
+          <td>{{employee.firstName}}</td>
+          <td>{{employee.lastName}}</td>
+          <td>{{employee.id}}</td>
+          <td>{{employee.age}}</td>
+          <td>{{employee.startDate}}</td>
+        
+          <td>{{employee.city}}</td>
+         
+          <td>{{employee.street}}</td>
+
+
+          
+      </tr>
+  </ng-template>
+</p-table>
+
